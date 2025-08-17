@@ -1,4 +1,6 @@
--- inserções CLIENTE
+-- inserts
+
+-- CLIENTE
 insert into cliente (nome, telefone, email, estado, municipio, rua, numero, cep) values
 ('Maria Clara', '83999910001', 'maria@gmail.com', 'PB', 'João Pessoa', 'Rua das Flores', 12, '58000-001'),
 ('João Pereira', '83999910002', 'joao@yahoo.com', 'PB', 'Campina Grande', 'Av Brasil', 100, '58100-010'),
@@ -16,7 +18,7 @@ insert into cliente (nome, telefone, email, estado, municipio, rua, numero, cep)
 ('Laura Ribeiro', '83999910014', 'laura@gmail.com', 'PB', 'Bayeux', 'Rua do Porto', 98, '58300-130'),
 ('André Santos', '83999910015', 'andre@gmail.com', 'PE', 'Caruaru', 'Rua das Pedras', 12, '55000-140');
 
--- inserções PAGAMENTO
+-- PAGAMENTO
 insert into pagamento (formaPagamento, dataPagamento, statusPagamento, valorTotal) values
 ('Cartão Crédito', '2025-08-01 10:00:00', 'Pago', 250.00),
 ('Boleto', '2025-08-02 11:30:00', 'Pago', 180.50),
@@ -34,7 +36,7 @@ insert into pagamento (formaPagamento, dataPagamento, statusPagamento, valorTota
 ('Cartão Crédito', '2025-08-14 20:00:00', 'Cancelado', 215.00),
 ('Pix', '2025-08-15 08:25:00', 'Pago', 340.00);
 
--- inserções VENDA
+-- VENDA
 insert into venda (statusPedido, datahoraVenda, idCliente, idPagamento) values
 ('Concluído', '2025-08-01 10:05:00', 1, 1),
 ('Concluído', '2025-08-02 11:35:00', 2, 2),
@@ -52,7 +54,7 @@ insert into venda (statusPedido, datahoraVenda, idCliente, idPagamento) values
 ('Cancelado', '2025-08-14 20:05:00', 14, 14),
 ('Concluído', '2025-08-15 08:30:00', 15, 15);
 
--- inserções ESPECIALIDADE
+-- ESPECIALIDADE
 insert into especialidade (nome, descricao) values
 ('Entalhe', 'Trabalhos detalhados em madeira'),
 ('Escultura', 'Esculturas de madeira variadas'),
@@ -70,7 +72,7 @@ insert into especialidade (nome, descricao) values
 ('Talha', 'Talha artística em madeira'),
 ('Painéis', 'Painéis decorativos em madeira');
 
--- inserções ARTESÃO
+-- ARTESÃO
 insert into artesao (nome, telefone, email, estado, municipio, rua, numero, cep, idEspecialidade) values
 ('José Almeida', '8399911001', 'jose@gmail.com', 'PB', 'João Pessoa', 'Rua A', 10, '58000-200', 1),
 ('Marcos Silva', '8399911002', 'marcos@yahoo.com', 'PB', 'Campina Grande', 'Rua B', 20, '58100-210', 2),
@@ -88,7 +90,7 @@ insert into artesao (nome, telefone, email, estado, municipio, rua, numero, cep,
 ('Eduardo Gomes', '8399911014', 'eduardo@gmail.com', 'PB', 'Bayeux', 'Rua N', 140, '58300-400', 14),
 ('Priscila Souza', '8399911015', 'priscila@gmail.com', 'PE', 'Recife', 'Rua O', 150, '50000-500', 15);
 
--- inserções PRODUTO
+-- PRODUTO
 insert into produto (nome, descricao, peso, valorUnitario, qtdProduto, idArtesao) values
 ('Escultura Sacro', 'Escultura decorativa sacro', 1.200, 120.00, 10, 1),
 ('Banco Rústico', 'Banco artesanal em madeira', 5.500, 300.00, 5, 2),
@@ -105,8 +107,22 @@ insert into produto (nome, descricao, peso, valorUnitario, qtdProduto, idArtesao
 ('Escultura Abstrata', 'Arte contemporânea', 4.000, 700.00, 3, 13),
 ('Bancada Rústica', 'Móvel de madeira rústica', 25.000, 1200.00, 2, 14),
 ('Painel Talhado', 'Painel artístico talhado', 10.000, 800.00, 5, 15);
+-------------------------------- NAO VENDIDOS PARA APARECER NA CONSULTA -------------------------------- * mudança
+insert into produto (nome, descricao, peso, valorUnitario, qtdProduto, idArtesao)
+values
+('Escultura de Coruja', 'Escultura em madeira de coruja', 1.200, 350.00, 5, 1),
+('Caixa de Joias Pequena', 'Caixa entalhada artesanal', 0.500, 120.00, 10, 2),
+('Porta-retratos Rústico', 'Porta-retrato feito em madeira nobre', 0.800, 90.00, 8, 3),
+('Bandeja Decorativa', 'Bandeja para servir, entalhada', 1.000, 200.00, 4, 4),
+('Cofrinho Artesanal', 'Cofrinho em madeira de lei', 0.600, 75.00, 15, 5),
+('Mini Banco', 'Banco rústico pequeno', 2.000, 250.00, 2, 6),
+('Relógio de Parede', 'Relógio artesanal de madeira', 1.500, 300.00, 3, 7),
+('Vaso de Madeira', 'Vaso esculpido à mão', 1.800, 400.00, 1, 8),
+('Prateleira de Parede', 'Prateleira rústica em madeira', 2.500, 180.00, 2, 9),
+('Caixinha de Chá', 'Caixa para chá em madeira fina', 0.700, 95.00, 6, 10);
 
--- inserções ITEMVENDA
+
+-- ITEMVENDA
 insert into itemVenda (quantidade, idVenda, idProduto) values
 (2, 1, 1),
 (1, 2, 2),
@@ -124,7 +140,7 @@ insert into itemVenda (quantidade, idVenda, idProduto) values
 (1, 15, 14),
 (3, 15, 15);
 
--- inserções TIPOMADEIRA
+-- TIPOMADEIRA
 insert into tipoMadeira (nome, origem, cor, textura, valor) values
 ('Mogno', 'Amazônia', 'Marrom Escuro', 'Lisa', 200.00),
 ('Ipê', 'Mata Atlântica', 'Amarelo', 'Dura', 250.00),
@@ -142,7 +158,7 @@ insert into tipoMadeira (nome, origem, cor, textura, valor) values
 ('Jatobá', 'Brasil', 'Marrom Avermelhado', 'Lisa', 260.00),
 ('Cerejeira', 'Brasil', 'Rosa Claro', 'Lisa', 210.00);
 
--- inserções PRODUTOTIPOMADEIRA
+-- PRODUTOTIPOMADEIRA
 insert into produtoTipoMadeira (idProduto, idTipoMadeira) values
 (1, 1),
 (2, 2),
@@ -160,10 +176,6 @@ insert into produtoTipoMadeira (idProduto, idTipoMadeira) values
 (14, 8),
 (15, 15);
 
--- consultas para checagens;
-select * from venda;
-select * from itemVenda;
-select * from produto;
 select * from produtoTipoMadeira;
 select * from cliente;
 select * from artesao;
