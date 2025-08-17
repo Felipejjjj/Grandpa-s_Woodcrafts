@@ -11,7 +11,7 @@
 intersect) 
 - [] 2 consultas que usem subqueries.
 ### views <- FELIPE FAZENDO
-- [] 1 visão que permita inserção  
+- [X] 1 visão que permita inserção  
 - [] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
 
 ### indices
