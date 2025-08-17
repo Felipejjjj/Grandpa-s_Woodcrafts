@@ -10,7 +10,7 @@
 - [] 1 consulta usando alguma operação de conjunto (union, except ou  
 intersect) 
 - [] 2 consultas que usem subqueries.
-### views
+### views <- FELIPE FAZENDO
 - [] 1 visão que permita inserção  
 - [] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
 
