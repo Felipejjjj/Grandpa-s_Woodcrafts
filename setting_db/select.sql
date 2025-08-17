@@ -1,12 +1,15 @@
 -- 10 CONSULTAS SEPARADAS POR ESPECIFICAÇÕES DO DOCUMENTO
 
--- (1) consulta com OPERADORES BÁSICOS DE FILTRO
--- 1: 
+
+-- (1) consulta com OPERADORES BÁSICOS DE FILTRO [OK!!!]
+-- 1: filtragem de produtos de preço 'medio' (100-500)
+select idProduto, descricao, valorUnitario as preco, qtdProduto as estoque
+from produto
+where valorUnitario between 100 and 500;
 
 
 -----------------------------------------------------------------------------------------
--- [OK]
--- (3) consultas com INNER JOIN;
+-- (3) consultas com INNER JOIN; [OK!!!]
 -- 1: relacionando artesaos com suas especialidades
 select a.nome as artesao, e.nome as especialidade
 from artesao a inner join especialidade e
@@ -25,8 +28,7 @@ inner join produto p
 on iv.idProduto = p.idProduto;
 
 -----------------------------------------------------------------------------------------
--- [OK]
--- (2) consultas com GROUP BY, se possivel com HAVING;
+-- (2) consultas com GROUP BY, se possivel com HAVING; [OK!!!]
 -- 1: qtd total de vendas (agrupado) por forma de pagamento
 select p.formaPagamento, count(v.idVenda) as total_vendas
 from pagamento p inner join venda v
@@ -41,21 +43,44 @@ group by p.nome having sum(iv.quantidade) > 2;
 
 
 -----------------------------------------------------------------------------------------
-
 -- (1) consulta com LEFT/RIGHT/FULL OUTER JOIN no from;
 --1:
 
 
 -----------------------------------------------------------------------------------------
+-- (1) consulta com OPERAÇÃO DE CONJUNTO (unio/except/intersect); [OK!!!]
+--1: produtos n vendidos nenhuma vez
+select p.idProduto, p.nome
+from produto p
 
--- (1) consulta com OPERAÇÃO DE CONJUNTO (unio/except/intersect);
---1:
+except
+
+select distinct iv.idProduto, p.nome
+from itemVenda iv
+inner join produto p on p.idProduto = iv.idProduto;
 
 
 -----------------------------------------------------------------------------------------
+-- (2) consultas com SUBQUERIES; [OK!!!]
+-- 1: mostra clientes que já compraram itens (valor unitario do produtoxquantidade) acima de 500 reais
+select distinct c.nome
+from cliente c
+where c.idCliente in (
+  select v.idCliente
+  from venda v
+  inner join itemVenda iv
+  on v.idVenda = iv.idVenda
+  inner join produto p
+  on iv.idProduto = p.idProduto
+  where (p.valorUnitario*iv.quantidade)>500
+);
 
--- (2) consultas com SUBQUERIES;
 
--- 1:
-
--- 2:
+-- 2: mostra artesaos com estoque caro
+select a.idArtesao, a.nome
+from artesao a
+where a.idArtesao in (
+    select p.idArtesao
+    from produto p
+    where (p.valorUnitario*p.qtdProduto)> 1000
+);
