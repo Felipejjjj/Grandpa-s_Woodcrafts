@@ -2,7 +2,7 @@
 - [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql);
 - [X] criação banco 
 - [X] 15 inserções p/tabela;
-### consultas 
+### - [X] consultas 
 - [X] 1 consulta com uma tabela usando operadores básicos de filtro (e.g., IN,  between, is null, etc).  
 - [X]  3 consultas com inner JOIN na cláusula FROM (pode ser self join, caso o  domínio indique esse uso).  
 - [X] 1 consulta com left/right/full outer join na cláusula FROM 
