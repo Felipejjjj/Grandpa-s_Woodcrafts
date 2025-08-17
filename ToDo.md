@@ -24,7 +24,7 @@ intersect)
 
 - [] 1 função que use SUM, MAX, MIN, AVG ou COUNT 
 - [] Outras 2 funções com justificativa semântica, conforme os requisitos da aplicação
-- [] 1 procedure com justificativa semântica, conforme os requisitos da aplicação
+- [x] 1 procedure com justificativa semântica, conforme os requisitos da aplicação
 
 > obs:Pelo menos uma função ou procedure deve ter tratamento de exceção. As funções desta seção não são as mesmas das funções de triggers 
 
