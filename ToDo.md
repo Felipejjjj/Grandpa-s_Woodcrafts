@@ -10,9 +10,9 @@
 - [X] 1 consulta usando alguma operação de conjunto (union, except ou  
 intersect) 
 - [X] 2 consultas que usem subqueries.
-### views <- FELIPE FAZENDO
+### - [x] views
 - [X] 1 visão que permita inserção  
-- [] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
+- [x] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
 
 ### indices
 - [] 3 índices para campos indicados com justificativa dentro do contexto das consultas  formuladas na questão 3a.
