@@ -43,8 +43,14 @@ group by p.nome having sum(iv.quantidade) > 2;
 
 
 -----------------------------------------------------------------------------------------
--- (1) consulta com LEFT/RIGHT/FULL OUTER JOIN no from;
---1:
+-- (1) consulta com LEFT/RIGHT/FULL OUTER JOIN no from; [OK!!!]
+--1: mostra todos os produtos e suas vendas (ate produto n vendido)
+select p.idProduto, p.nome as produto, v.idVenda, v.datahoraVenda
+from produto p
+full outer join itemVenda iv
+on p.idProduto = iv.idProduto
+full outer join venda v
+on iv.idVenda = v.idVenda;
 
 
 -----------------------------------------------------------------------------------------
@@ -52,9 +58,7 @@ group by p.nome having sum(iv.quantidade) > 2;
 --1: produtos n vendidos nenhuma vez
 select p.idProduto, p.nome
 from produto p
-
 except
-
 select distinct iv.idProduto, p.nome
 from itemVenda iv
 inner join produto p on p.idProduto = iv.idProduto;
