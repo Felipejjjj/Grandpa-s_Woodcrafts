@@ -15,3 +15,54 @@ $$;
 
 call atualizar_valor();
 	
+
+--------------------------------------------------------------------
+
+-- duas funcoes 
+
+-- funcao 1: 
+
+CREATE OR REPLACE FUNCTION calcular_total_venda(p_idVenda INT)
+returns DECIMAL(10,2) AS $$
+DECLARE
+    total DECIMAL(10,2);
+BEGIN
+    select SUM(iv.quantidade * p.valorUnitario)
+    INTO total
+    FROM itemVenda iv
+    JOIN produto p
+	ON iv.idProduto = p.idProduto
+    WHERE iv.idVenda = p_idVenda;
+
+    return COALESCE(total, 0);
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT calcular_total_venda(1) AS totalVenda; -- teste
+
+-- funcao 2: 
+
+CREATE OR REPLACE FUNCTION estoque_disponivel(p_idProduto INT)
+returns INT AS $$
+DECLARE
+    vendido INT;
+    disponivel INT;
+BEGIN
+    -- total vendido
+    SELECT COALESCE(SUM(quantidade),0)
+    INTO vendido
+    FROM itemVenda
+    WHERE idProduto = p_idProduto;
+
+    -- estoque atual
+    SELECT qtdProduto - vendido
+    INTO disponivel
+    from produto
+    WHERE idProduto = p_idProduto;
+
+    RETURN disponivel;
+END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT estoque_disponivel(3) AS estoqueAtual; -- teste 
