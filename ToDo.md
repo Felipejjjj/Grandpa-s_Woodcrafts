@@ -2,7 +2,7 @@
 - [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql);
 - [X] criação banco 
 - [X] 15 inserções p/tabela;
-### - [X] consultas 
+### [X] consultas 
 - [X] 1 consulta com uma tabela usando operadores básicos de filtro (e.g., IN,  between, is null, etc).  
 - [X]  3 consultas com inner JOIN na cláusula FROM (pode ser self join, caso o  domínio indique esse uso).  
 - [X] 1 consulta com left/right/full outer join na cláusula FROM 
@@ -10,20 +10,20 @@
 - [X] 1 consulta usando alguma operação de conjunto (union, except ou  
 intersect) 
 - [X] 2 consultas que usem subqueries.
-### - [x] views
+### [X] views
 - [X] 1 visão que permita inserção  
 - [x] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
 
 ### indices
 - [] 3 índices para campos indicados com justificativa dentro do contexto das consultas  formuladas na questão 3a.
 
-### reescrita <- CLARA FAZENDO
-- []  Identificar 2 exemplos de consultas dentro do contexto da aplicação (questão 2.a) que  possam e devam ser melhoradas. Reescrevê-las e justificar a reescrita.  
+### [X] reescrita
+- [X]  Identificar 2 exemplos de consultas dentro do contexto da aplicação (questão 2.a) que  possam e devam ser melhoradas. Reescrevê-las e justificar a reescrita.  
 
 ### funcoes
 
 - [] 1 função que use SUM, MAX, MIN, AVG ou COUNT 
-- [] Outras 2 funções com justificativa semântica, conforme os requisitos da aplicação
+- [] Outras 2 funções com justificativa semântica, conforme os requisitos da aplicação <- CLARA FAZENDO
 - [x] 1 procedure com justificativa semântica, conforme os requisitos da aplicação
 
 > obs:Pelo menos uma função ou procedure deve ter tratamento de exceção. As funções desta seção não são as mesmas das funções de triggers 
