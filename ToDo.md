@@ -32,3 +32,6 @@ intersect)
 
 - [] 3 diferentes triggers com justificativa semântica, de acordo com os requisitos da  aplicação. <- CLARA VAI FAZER 
 
+### extra por desatenção
+- [] inserção de mais produtos por artesão
+- [] update dos valortotal de pagamento usando a funcao calcular_total_venda

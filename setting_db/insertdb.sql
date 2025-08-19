@@ -181,3 +181,4 @@ select * from cliente;
 select * from artesao;
 select * from  especialidade;
 select * from tipomadeira;
+ -- inserções 
