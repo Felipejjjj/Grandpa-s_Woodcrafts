@@ -32,7 +32,7 @@ intersect)
 ### triggers
 - [X] trigger 1
 - [X] trigger 2
-- [] trigger 3 <- FELIPE
+- [x] trigger 3 
 ### extra por desatenção
 - [X] inserção de mais produtos por artesão
 - [X] update dos valortotal de pagamento usando a funcao calcular_total_venda
