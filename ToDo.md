@@ -1,5 +1,6 @@
 ## ToDo List
-- [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql);
+- [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql); <- CLARA
+- [] SLIDES <- CLARA
 - [X] criação banco 
 - [X] 15 inserções p/tabela;
 ### [X] consultas 
@@ -15,23 +16,23 @@ intersect)
 - [x] 2 visões robustas (e.g., com vários joins) com justificativa semântica, de acordo com os  requisitos da aplicação. 
 
 ### indices
-- [] 3 índices para campos indicados com justificativa dentro do contexto das consultas  formuladas na questão 3a.
+- [] 3 índices para campos indicados com justificativa dentro do contexto das consultas  formuladas na questão 3a. <- FELIPE
 
 ### [X] reescrita
 - [X]  Identificar 2 exemplos de consultas dentro do contexto da aplicação (questão 2.a) que  possam e devam ser melhoradas. Reescrevê-las e justificar a reescrita.  
 
 ### funcoes
 
-- [x] 1 função que use SUM, MAX, MIN, AVG ou COUNT 
+- [X] 1 função que use SUM, MAX, MIN, AVG ou COUNT
 - [X] Outras 2 funções com justificativa semântica, conforme os requisitos da aplicação
 - [x] 1 procedure com justificativa semântica, conforme os requisitos da aplicação
 
-> obs:Pelo menos uma função ou procedure deve ter tratamento de exceção. As funções desta seção não são as mesmas das funções de triggers 
+> obs: Pelo menos uma função ou procedure deve ter tratamento de exceção. As funções desta seção não são as mesmas das funções de triggers 
 
 ### triggers
-
-- [] 3 diferentes triggers com justificativa semântica, de acordo com os requisitos da  aplicação. <- CLARA VAI FAZER 
-
-### extra por desatenção
-- [] inserção de mais produtos por artesão
-- [] update dos valortotal de pagamento usando a funcao calcular_total_venda
+- [X] trigger 1
+- [X] trigger 2
+- [] trigger 3 <- FELIPE
+### extra por desatenção * CLARA TA FAZEDNO ISSO AGORA
+- [] inserção de mais produtos por artesão <- CLARA
+- [] update dos valortotal de pagamento usando a funcao calcular_total_venda <- CLARA
