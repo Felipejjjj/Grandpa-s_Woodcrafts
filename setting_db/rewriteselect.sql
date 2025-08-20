@@ -1,9 +1,7 @@
 -- reescrita de (2) consultas
 
 -- CONSULTAS ESCOLHIDAS E JUSTIFICATIVA DE REESCRITAS;
-
 -- 1) mostra clientes que já compraram itens (valor unitario do produtoxquantidade) acima de 500 reais
- 
 '''
 select distinct c.nome
 from cliente c
@@ -54,11 +52,8 @@ on iv.idVenda = v.idVenda;
 
 '''
 - FULL OUTER JOIN traz muitos dados irrelevante
-
 - Para analisar vendas por produto, é melhor garantir todos os produtos e juntar (LEFT JOIN) os itens vendidos, para não perder produtos sem vendas.
-
 - não é necessário juntar venda para saber o total vendido por produto, pois itemVenda já tem essa associação. Reduz a complexidade da consulta e melhora performance.
-
 - Uso do COALESCE evita resultados confusos com NULL
 '''
 
