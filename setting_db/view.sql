@@ -9,7 +9,8 @@ insert into vw_tipomadeira values('Cumaru', 'Bege', 100.00);
 
 -- view para gerar um relatorio de compra [ROBUSTA]
 create or replace view vw_relatorio_compra as
-	select v.idVenda,v.statusPedido, v.datahoraVenda, c.nome as "cliente", c.telefone, p.valorTotal, p.statusPagamento, pr.nome as "produto", pr.descricao, pr.valorUnitario, ar.nome as "artesão" 
+	select v.idVenda,v.statusPedido, v.datahoraVenda, c.nome as "cliente", c.telefone, p.valorTotal,
+	p.statusPagamento, pr.nome as "produto", pr.descricao, pr.valorUnitario, ar.nome as "artesão" 
 	from venda v join cliente c on v.idcliente = c.idcliente
 	join pagamento p on v.idPagamento = p.idPagamento
 	join itemVenda iv on v.idVenda = iv.idVenda
