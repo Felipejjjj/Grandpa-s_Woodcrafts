@@ -1,4 +1,4 @@
--- PROCEDURE: aumentar ou diminuir o valor de todos os produtos de um artesão em um valor percentual
+-- PROCEDURE: AUMENTAR OU DIMINUIR O VALOR DE TODOS OS PRODUTOS DE UM ARTESÃO EM UM VALOR PERCENTUAL
 create or replace procedure atualizar_valor(p_idArtesao int, p_percentual numeric)
 language plpgsql
 AS $$
@@ -16,7 +16,7 @@ END;
 $$;
 call atualizar_valor(1, 6); --teste
 ------------------------------------------------------------------------------------------------------------------
--- FUNCTION: que retorna a media de pagamentos por tipo 
+-- FUNCTION: RETORNA A MEDIA DE TIPOS DE PAGAMENTO
 create or replace function media_pagamentos_por_tipo(p_tipoPagamento varchar(10))
 returns numeric as $$
 declare
@@ -39,9 +39,7 @@ select media_pagamentos_por_tipo('Boleto');
 
 --------------------------------------------------------------------
 
--- duas funcoes 
-
--- funcao 1: 
+-- FUNCTION 1: CALCULAR TOTAL DA VENDA 
 
 CREATE OR REPLACE FUNCTION calcular_total_venda(p_idVenda INT)
 returns DECIMAL(10,2) AS $$
@@ -61,7 +59,7 @@ $$ LANGUAGE plpgsql;
 
 SELECT calcular_total_venda(1) AS totalVenda; -- teste
 
--- funcao 2: 
+-- FUNCTION 2: QUANTIDADE DE UM PRODUTO AINDA DISPONIVEL
 
 CREATE OR REPLACE FUNCTION estoque_disponivel(p_idProduto INT)
 returns INT AS $$
