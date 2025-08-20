@@ -33,6 +33,6 @@ intersect)
 - [X] trigger 1
 - [X] trigger 2
 - [] trigger 3 <- FELIPE
-### extra por desatenção
+### extra por desatenção * CLARA TA FAZEDNO ISSO AGORA
 - [] inserção de mais produtos por artesão <- CLARA
 - [] update dos valortotal de pagamento usando a funcao calcular_total_venda <- CLARA
