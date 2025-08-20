@@ -66,7 +66,7 @@ NOTICE:  Estoque atualizado do produto 1: 7 unidades
 
 -- insert into itemVenda (quantidade, idVenda, idProduto) values (1, 1, 1)
 -------------------------------------------------------------------------------------------------
--- (3) TRIGGER: Atualizar o status do pedido apartir do status do pagamento---
+-- (3) TRIGGER: ATUALIZAR O STATUS DO PEDIDO APARTIR DO STATUS DO PAGAMENTO
 CREATE OR REPLACE FUNCTION atualizar_status_venda()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -103,9 +103,6 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-
--- Criando o trigger
 
 CREATE TRIGGER trigger_atualiza_status_venda
 AFTER INSERT OR UPDATE ON pagamento
