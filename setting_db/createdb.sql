@@ -82,7 +82,7 @@ create table tipoMadeira (
 	origem          VARCHAR(45),
 	cor             VARCHAR(45) not null,
 	textura         VARCHAR(45),
-	valor           DECIMAL NOT NULL); -- atualizado
+	valor           DECIMAL NOT NULL);
 alter table tipoMadeira add constraint pktipoMadeira primary key(idTipoMadeira);
 
 
