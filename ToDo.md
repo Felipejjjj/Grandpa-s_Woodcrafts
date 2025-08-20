@@ -22,7 +22,7 @@ intersect)
 
 ### funcoes
 
-- [] 1 função que use SUM, MAX, MIN, AVG ou COUNT 
+- [x] 1 função que use SUM, MAX, MIN, AVG ou COUNT 
 - [X] Outras 2 funções com justificativa semântica, conforme os requisitos da aplicação
 - [x] 1 procedure com justificativa semântica, conforme os requisitos da aplicação
 
