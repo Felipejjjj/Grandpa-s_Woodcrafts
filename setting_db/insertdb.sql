@@ -181,4 +181,8 @@ select * from cliente;
 select * from artesao;
 select * from  especialidade;
 select * from tipomadeira;
- -- inserções 
+-- atualizar o valor total da venda na tabela pagamento
+UPDATE pagamento p
+SET valorTotal = calcular_total_venda(v.idVenda)
+FROM venda v
+WHERE p.idPagamento = v.idPagamento;
