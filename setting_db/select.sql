@@ -88,3 +88,33 @@ where a.idArtesao in (
     from produto p
     where (p.valorUnitario*p.qtdProduto)> 1000
 );
+
+
+
+---indicies---
+create index idx_itemVenda_idVenda_idProduto on itemVenda(idVenda, idProduto);
+'''facilita querie que usa junção
+
+select v.idVenda, p.nome as produto, iv.quantidade
+from venda v inner join itemVenda iv
+on v.idVenda = iv.idVenda
+inner join produto p
+on iv.idProduto = p.idProduto;
+'''
+
+create index idx_produto_idArtesao ON produto(idArtesao);
+''' Facilita localizar rapidamente todos os produtos de um artesão com estoque caro.
+select a.idArtesao, a.nome
+from artesao a
+where a.idArtesao in (
+    select p.idArtesao
+    from produto p
+    where (p.valorUnitario*p.qtdProduto)> 1000
+);
+'''
+create index idx_venda_cliente_status_data on venda(idCliente, statusPedido, datahoraVenda);
+'''facilita para criar um relatorio sobre o pedido do cliente
+select v.idVenda, c.nome as cliente, v.statusPedido, v.datahoraVenda
+from venda v inner join cliente 
+on v.idCliente = c.idCliente;
+'''

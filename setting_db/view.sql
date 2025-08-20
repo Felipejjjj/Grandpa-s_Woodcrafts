@@ -1,4 +1,4 @@
---view para mostrar nome, cor e preço de um tipomadeira--
+--view para mostrar nome, cor e preço de um tipomadeira e que permite inserção--
 create or replace view vw_tipomadeira as
 	select nome, cor, valor 
 	from tipomadeira;
@@ -15,13 +15,13 @@ create or replace view vw_relatorio_compra as
 	join itemVenda iv on v.idVenda = iv.idVenda
 	join produto pr on iv.idProduto = pr.idProduto
 	join artesao ar on pr.idArtesao = ar.idArtesao;
--
+
 select * from vw_relatorio_compra;
 
 
 --view para dados relacionado a um produto--
 create or replace view vw_inventario_produtos_madeira as
-	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao", tm.nome as "madeira", tm.cor, tm.origem, tm.valor
+	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao", tm.nome as "madeira", tm.cor, tm.origem, tm.valor as "valor_madeira"
 	from produto pr join artesao ar on pr.idArtesao = ar.idArtesao
 	join produtoTipoMadeira ptm on pr.idProduto = ptm.idProduto
 	join tipomadeira tm on ptm.idTipoMadeira = tm.idTipoMadeira;

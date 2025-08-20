@@ -198,6 +198,7 @@ select * from cliente;
 select * from artesao;
 select * from  especialidade;
 select * from tipomadeira;
+select * from pagamento;
 
 -- atualizar o valor total da venda na tabela pagamento
 UPDATE pagamento p
