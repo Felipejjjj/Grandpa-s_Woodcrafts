@@ -34,7 +34,6 @@ order by total_compra desc; -- para deixar mais organizada a consulta
 -----------------------------------------------------------------------------------------
 
 -- 2) mostra todos os produtos e suas vendas (ate produto n vendido)
-
 '''
 select p.idProduto, p.nome as produto, v.idVenda, v.datahoraVenda
 from produto p
@@ -43,20 +42,17 @@ on p.idProduto = iv.idProduto
 [FULL OUTER JOIN]* venda v
 on iv.idVenda = v.idVenda;
 '''
-
 -- JUSTIFICATIVA: junção com [FULL OUTER JOIN] retorna todas as linhas de ambas as tabelas,
 -- independentemente de haver correspondência, o que gera resultados extensos e redundantes.
 -- em resumo: A mudança transforma uma consulta extensa, detalhada e "inflada", que mistura linhas individuais com muitos NULLs,
 -- numa consulta resumida, focada, eficiente e organizada, que ajuda a entender claramente o desempenho de cada produto em termos
 -- de quantidade vendida e faturamento total, mantendo a lista completa de produtos mesmo sem vendas.
-
 '''
 - FULL OUTER JOIN traz muitos dados irrelevante
 - Para analisar vendas por produto, é melhor garantir todos os produtos e juntar (LEFT JOIN) os itens vendidos, para não perder produtos sem vendas.
 - não é necessário juntar venda para saber o total vendido por produto, pois itemVenda já tem essa associação. Reduz a complexidade da consulta e melhora performance.
 - Uso do COALESCE evita resultados confusos com NULL
 '''
-
 -- REESCRITA:
 select 
     p.idProduto, 
