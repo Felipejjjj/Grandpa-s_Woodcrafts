@@ -120,6 +120,23 @@ values
 ('Vaso de Madeira', 'Vaso esculpido à mão', 1.800, 400.00, 1, 8),
 ('Prateleira de Parede', 'Prateleira rústica em madeira', 2.500, 180.00, 2, 9),
 ('Caixinha de Chá', 'Caixa para chá em madeira fina', 0.700, 95.00, 6, 10);
+insert into produto (nome, descricao, peso, valorUnitario, qtdProduto, idArtesao)
+values
+('Painel de Flores', 'Painel decorativo com flores entalhadas', 3.000, 500.00, 3, 1),
+('Escultura de Cavalo', 'Escultura artesanal de cavalo em madeira', 2.500, 450.00, 2, 2),
+('Mesa Lateral', 'Mesa pequena para canto ou sala', 7.000, 650.00, 4, 3),
+('Castiçal Rústico', 'Castiçal feito em madeira entalhada', 1.200, 120.00, 6, 4),
+('Caixa de Ferramentas', 'Caixa de madeira para guardar ferramentas', 2.000, 180.00, 5, 5),
+('Banco Dobrável', 'Banco pequeno dobrável artesanal', 3.500, 300.00, 3, 6),
+('Porta-Livros', 'Suporte de livros em madeira', 2.000, 200.00, 4, 7),
+('Miniatura Igreja', 'Miniatura de igreja em madeira', 1.000, 150.00, 2, 8),
+('Quadro Decorativo', 'Quadro de parede em madeira entalhada', 2.800, 400.00, 3, 9),
+('Tábua de Servir', 'Tábua rústica para servir alimentos', 1.000, 90.00, 5, 10),
+('Escultura de Árvore', 'Escultura decorativa de árvore', 2.500, 350.00, 2, 11),
+('Caixinha Musical', 'Caixa de madeira com mecanismo musical', 0.800, 250.00, 4, 12),
+('Escultura Moderna', 'Peça abstrata em madeira', 3.200, 700.00, 2, 13),
+('Banco Rústico Grande', 'Banco artesanal rústico para sala', 15.000, 1200.00, 1, 14),
+('Painel Talhado Grande', 'Painel decorativo talhado grande', 12.000, 900.00, 2, 15);
 
 
 -- ITEMVENDA
@@ -181,6 +198,7 @@ select * from cliente;
 select * from artesao;
 select * from  especialidade;
 select * from tipomadeira;
+
 -- atualizar o valor total da venda na tabela pagamento
 UPDATE pagamento p
 SET valorTotal = calcular_total_venda(v.idVenda)

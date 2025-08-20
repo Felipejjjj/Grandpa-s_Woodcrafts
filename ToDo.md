@@ -1,6 +1,6 @@
 ## ToDo List
-- [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql); <- CLARA
-- [] SLIDES <- CLARA
+- [] documento google com as questoes + codigos .sql  + anexo arquivo com todos os arq separados juntos (será o 'projetoBD2.sql); <- CLARA * ESTOU FAZENDO
+- [] SLIDES <- CLARA * ESTOU FAZENDO
 - [X] criação banco 
 - [X] 15 inserções p/tabela;
 ### [X] consultas 
@@ -33,6 +33,6 @@ intersect)
 - [X] trigger 1
 - [X] trigger 2
 - [] trigger 3 <- FELIPE
-### extra por desatenção * CLARA TA FAZEDNO ISSO AGORA
-- [] inserção de mais produtos por artesão <- CLARA
-- [] update dos valortotal de pagamento usando a funcao calcular_total_venda <- CLARA
+### extra por desatenção
+- [X] inserção de mais produtos por artesão
+- [X] update dos valortotal de pagamento usando a funcao calcular_total_venda
