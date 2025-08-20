@@ -22,7 +22,8 @@ select * from vw_relatorio_compra;
 
 -- view para dados relacionado a um produto [ROBUSTA]
 create or replace view vw_inventario_produtos_madeira as
-	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao", tm.nome as "madeira", tm.cor, tm.origem, tm.valor as "valor_madeira"
+	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao",
+	tm.nome as "madeira", tm.cor, tm.origem, tm.valor as "valor_madeira"
 	from produto pr join artesao ar on pr.idArtesao = ar.idArtesao
 	join produtoTipoMadeira ptm on pr.idProduto = ptm.idProduto
 	join tipomadeira tm on ptm.idTipoMadeira = tm.idTipoMadeira;
