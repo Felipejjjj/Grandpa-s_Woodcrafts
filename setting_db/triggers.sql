@@ -66,27 +66,11 @@ NOTICE:  Estoque atualizado do produto 1: 7 unidades
 
 -- insert into itemVenda (quantidade, idVenda, idProduto) values (1, 1, 1)
 -------------------------------------------------------------------------------------------------
--- (3) TRIGGER: ATUALIZAR O STATUS DO PEDIDO APARTIR DO STATUS DO PAGAMENTO
+ (3) TRIGGER: ATUALIZAR O STATUS DO PEDIDO APARTIR DO STATUS DO PAGAMENTO - sincronizar status venda e pagamento para não existir inconsistência
 CREATE OR REPLACE FUNCTION atualizar_status_venda()
 RETURNS TRIGGER AS $$
-DECLARE
-    soma_pagamentos NUMERIC;
-    valor_venda NUMERIC;
 BEGIN
-    -- Busca a venda relacionada ao pagamento
-    SELECT valorTotal INTO valor_venda
-    FROM pagamento p
-    JOIN venda v ON v.idPagamento = p.idPagamento
-    WHERE p.idPagamento = NEW.idPagamento;
-
-    -- Soma todos os pagamentos feitos para esta venda
-    SELECT SUM(valorTotal) INTO soma_pagamentos
-    FROM pagamento
-    WHERE idPagamento = NEW.idPagamento
-      AND statusPagamento = 'Pago';
-
-    -- Atualiza o status da venda
-    IF soma_pagamentos >= valor_venda THEN
+    IF NEW.statusPagamento = 'Pago' THEN
         UPDATE venda
         SET statusPedido = 'Concluído'
         WHERE idPagamento = NEW.idPagamento;
@@ -104,10 +88,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS trigger_atualiza_status_venda ON pagamento;
+
 CREATE TRIGGER trigger_atualiza_status_venda
 AFTER INSERT OR UPDATE ON pagamento
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_status_venda();
+
 
 -- Teste com a venda de id 6 sabendo que está com status pendente, mudar o pagamento para "Pago" 
 UPDATE pagamento
