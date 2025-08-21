@@ -82,7 +82,7 @@ create table tipoMadeira (
 	origem          VARCHAR(45),
 	cor             VARCHAR(45) not null,
 	textura         VARCHAR(45),
-	valor           DECIMAL NOT NULL); -- atualizado
+	valor           DECIMAL NOT NULL);
 alter table tipoMadeira add constraint pktipoMadeira primary key(idTipoMadeira);
 
 
@@ -93,6 +93,7 @@ create table produtoTipoMadeira (
 alter table produtoTipoMadeira add constraint pkprodutoTipoMadeira primary key(idProduto, idTipoMadeira);
 alter table produtoTipoMadeira add constraint fk_produtoTipoMadeira_produto foreign key(idProduto) references produto;
 alter table produtoTipoMadeira add constraint fk_produtoTipoMadeira_tipomadeira foreign key(idTipoMadeira) references tipoMadeira;
+
 
 -- inserts
 
@@ -289,15 +290,12 @@ insert into produtoTipoMadeira (idProduto, idTipoMadeira) values
 (14, 8),
 (15, 15);
 
-select * from artesao;
-select * from cliente;
-select * from especialidade;
-select * from itemvenda;
-select * from pagamento;
-select * from produto
 select * from produtoTipoMadeira;
+select * from cliente;
+select * from artesao;
+select * from  especialidade;
 select * from tipomadeira;
-select * from venda;
+select * from pagamento;
 
 -- atualizar o valor total da venda na tabela pagamento
 UPDATE pagamento p
@@ -308,7 +306,7 @@ WHERE p.idPagamento = v.idPagamento;
 -- 10 CONSULTAS SEPARADAS POR ESPECIFICAÇÕES DO DOCUMENTO
 
 
--- (1) consulta com OPERADORES BÁSICOS DE FILTRO [OK!!!]
+-- (1) consulta com OPERADORES BÁSICOS DE FILTRO;
 -- 1: filtragem de produtos de preço 'medio' (100-500)
 select idProduto, descricao, valorUnitario as preco, qtdProduto as estoque
 from produto
@@ -316,7 +314,7 @@ where valorUnitario between 100 and 500;
 
 
 -----------------------------------------------------------------------------------------
--- (3) consultas com INNER JOIN; [OK!!!]
+-- (3) consultas com INNER JOIN; 
 -- 1: relacionando artesaos com suas especialidades
 select a.nome as artesao, e.nome as especialidade
 from artesao a inner join especialidade e
@@ -335,7 +333,7 @@ inner join produto p
 on iv.idProduto = p.idProduto;
 
 -----------------------------------------------------------------------------------------
--- (2) consultas com GROUP BY, se possivel com HAVING; [OK!!!]
+-- (2) consultas com GROUP BY, se possivel com HAVING;
 -- 1: qtd total de vendas (agrupado) por forma de pagamento
 select p.formaPagamento, count(v.idVenda) as total_vendas
 from pagamento p inner join venda v
@@ -350,7 +348,7 @@ group by p.nome having sum(iv.quantidade) > 2;
 
 
 -----------------------------------------------------------------------------------------
--- (1) consulta com LEFT/RIGHT/FULL OUTER JOIN no from; [OK!!!]
+-- (1) consulta com LEFT/RIGHT/FULL OUTER JOIN no from;
 --1: mostra todos os produtos e suas vendas (ate produto n vendido)
 select p.idProduto, p.nome as produto, v.idVenda, v.datahoraVenda
 from produto p
@@ -361,7 +359,7 @@ on iv.idVenda = v.idVenda;
 
 
 -----------------------------------------------------------------------------------------
--- (1) consulta com OPERAÇÃO DE CONJUNTO (unio/except/intersect); [OK!!!]
+-- (1) consulta com OPERAÇÃO DE CONJUNTO (unio/except/intersect);
 --1: produtos n vendidos nenhuma vez
 select p.idProduto, p.nome
 from produto p
@@ -372,7 +370,7 @@ inner join produto p on p.idProduto = iv.idProduto;
 
 
 -----------------------------------------------------------------------------------------
--- (2) consultas com SUBQUERIES; [OK!!!]
+-- (2) consultas com SUBQUERIES;
 -- 1: mostra clientes que já compraram itens (valor unitario do produtoxquantidade) acima de 500 reais
 select distinct c.nome
 from cliente c
@@ -395,9 +393,8 @@ where a.idArtesao in (
     from produto p
     where (p.valorUnitario*p.qtdProduto)> 1000
 );
-
--------views-----------
---view para mostrar nome, cor e preço de um tipomadeira e que permite inserção--
+-----------------------------------------------------------------------------------------
+-- view para mostrar nome, cor e preço de um tipomadeira e que permite inserção [INSERÇÃO]
 create or replace view vw_tipomadeira as
 	select nome, cor, valor 
 	from tipomadeira;
@@ -406,9 +403,10 @@ select * from vw_tipomadeira;
 insert into vw_tipomadeira values('Cumaru', 'Bege', 100.00);
 
 
-----view para gerar um relatorio de compra--
+-- view para gerar um relatorio de compra [ROBUSTA]
 create or replace view vw_relatorio_compra as
-	select v.idVenda,v.statusPedido, v.datahoraVenda, c.nome as "cliente", c.telefone, p.valorTotal, p.statusPagamento, pr.nome as "produto", pr.descricao, pr.valorUnitario, ar.nome as"artesão" 
+	select v.idVenda,v.statusPedido, v.datahoraVenda, c.nome as "cliente", c.telefone, p.valorTotal,
+	p.statusPagamento, pr.nome as "produto", pr.descricao, pr.valorUnitario, ar.nome as "artesão" 
 	from venda v join cliente c on v.idcliente = c.idcliente
 	join pagamento p on v.idPagamento = p.idPagamento
 	join itemVenda iv on v.idVenda = iv.idVenda
@@ -418,9 +416,10 @@ create or replace view vw_relatorio_compra as
 select * from vw_relatorio_compra;
 
 
---view para dados relacionado a um produto--
+-- view para dados relacionado a um produto [ROBUSTA]
 create or replace view vw_inventario_produtos_madeira as
-	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao", tm.nome as "madeira", tm.cor, tm.origem, tm.valor as "valor_madeira"
+	select pr.nome as "produto", pr.descricao, pr.valorUnitario, pr.qtdProduto, ar.nome as "artesao",
+	tm.nome as "madeira", tm.cor, tm.origem, tm.valor as "valor_madeira"
 	from produto pr join artesao ar on pr.idArtesao = ar.idArtesao
 	join produtoTipoMadeira ptm on pr.idProduto = ptm.idProduto
 	join tipomadeira tm on ptm.idTipoMadeira = tm.idTipoMadeira;
@@ -428,19 +427,30 @@ create or replace view vw_inventario_produtos_madeira as
 select * from vw_inventario_produtos_madeira;
 
 
----indicies---
+-- (3) INDICES SOLICITADOS
+-- 1 INDICE: PARA FACILITAR A CONSULTA QUE UTILIZA JUNÇÃO
 create index idx_itemVenda_idVenda_idProduto on itemVenda(idVenda, idProduto);
-'''facilita querie que usa junção
 
+-- JUSTIFICATIVA: sem ele, o banco precisaria realizar 'varreduras' completas na tabela ITEMVENDA
+-- para localizar os registros, o que aumenta o tempo de execução conforme o volume de dados vai aumentando.
+-- com o índice composto (IDVENDA, IDPRODUTO), o otimizador de consultas consegue acessar os registros
+-- de forma 'focada', o que garante maior desempenho e escalabilidade do sistema em cenários de alto volume de vendas e itens associados.
+
+'''
 select v.idVenda, p.nome as produto, iv.quantidade
 from venda v inner join itemVenda iv
 on v.idVenda = iv.idVenda
 inner join produto p
 on iv.idProduto = p.idProduto;
 '''
-
+-- 2 INDICE: PARA FACILITAR LOCALIZAR RAPIDAMENTE TODOS OS PRODUTOS DE UM ARTESÃO COM ESTOQUE CARO
 create index idx_produto_idArtesao ON produto(idArtesao);
-''' Facilita localizar rapidamente todos os produtos de um artesão com estoque caro.
+-- JUSTIFICATIVA: criado para otimizar consultas que relacionam artesãos e seus produtos, 
+-- permitindo localizar rapidamente todos os produtos de um mesmo artesão. sem ele, o banco precisaria 
+-- realizar varreduras completas na tabela produto para encontrar registros associados a cada artesão, 
+-- aumentando significativamente o custo de leitura conforme o número de produtos cresce.
+
+'''
 select a.idArtesao, a.nome
 from artesao a
 where a.idArtesao in (
@@ -449,8 +459,19 @@ where a.idArtesao in (
     where (p.valorUnitario*p.qtdProduto)> 1000
 );
 '''
+-- 3 INDICE: FACILITA CRIAR UM RELATORIO SOBRE O PEDIDO DO CLIENTE
 create index idx_venda_cliente_status_data on venda(idCliente, statusPedido, datahoraVenda);
-'''facilita para criar um relatorio sobre o pedido do cliente
+  
+-- JUSTIFICATIVA: criado para otimizar consultas que envolvem relatórios de vendas por cliente,
+-- status do pedido e data da venda. sem ele, o banco precisaria realizar varreduras completas na tabela venda
+-- para localizar registros correspondentes, o que aumentaria o tempo de execução em cenários com grande
+-- quantidade de pedidos cadastrados.
+-- com o índice composto (idCliente, statusPedido, datahoraVenda), o otimizador de consultas consegue acessar 
+-- os registros de forma direcionada, tornando mais eficiente a geração de relatórios que detalham a situação 
+-- dos pedidos de cada cliente. isso garante maior desempenho e escalabilidade do sistema em operações de análise
+-- e acompanhamento de vendas.
+
+'''
 select v.idVenda, c.nome as cliente, v.statusPedido, v.datahoraVenda
 from venda v inner join cliente 
 on v.idCliente = c.idCliente;
@@ -460,9 +481,7 @@ on v.idCliente = c.idCliente;
 -- reescrita de (2) consultas
 
 -- CONSULTAS ESCOLHIDAS E JUSTIFICATIVA DE REESCRITAS;
-
 -- 1) mostra clientes que já compraram itens (valor unitario do produtoxquantidade) acima de 500 reais
- 
 '''
 select distinct c.nome
 from cliente c
@@ -481,6 +500,8 @@ where c.idCliente [IN]* (
 -- FEITAS DE MANEIRA MAIS PARALELA E OTIMIZADA, POIS ELE CONECTA AS TABELAS UMA UNICA VEZ E PROCESSA TODAS AS LINHAS SIMULTANEAMENTE.
 -- Oracle, SQL Server e PostgreSQL indicam que subqueries com IN em cláusulas WHERE são menos performáticas do que joins, principalmente sem índices apropriados.
 
+
+
 -- REESCRITA:
 select c.nome, v.idVenda, sum(p.valorUnitario*iv.quantidade) as total_compra -- aprveitei para agregar informações relevantes tipo o total da compra e o id
 from cliente c -- [IN]: subistituido por INNER JOIN
@@ -495,7 +516,6 @@ order by total_compra desc; -- para deixar mais organizada a consulta
 -----------------------------------------------------------------------------------------
 
 -- 2) mostra todos os produtos e suas vendas (ate produto n vendido)
-
 '''
 select p.idProduto, p.nome as produto, v.idVenda, v.datahoraVenda
 from produto p
@@ -504,23 +524,17 @@ on p.idProduto = iv.idProduto
 [FULL OUTER JOIN]* venda v
 on iv.idVenda = v.idVenda;
 '''
-
 -- JUSTIFICATIVA: junção com [FULL OUTER JOIN] retorna todas as linhas de ambas as tabelas,
 -- independentemente de haver correspondência, o que gera resultados extensos e redundantes.
 -- em resumo: A mudança transforma uma consulta extensa, detalhada e "inflada", que mistura linhas individuais com muitos NULLs,
 -- numa consulta resumida, focada, eficiente e organizada, que ajuda a entender claramente o desempenho de cada produto em termos
 -- de quantidade vendida e faturamento total, mantendo a lista completa de produtos mesmo sem vendas.
-
 '''
 - FULL OUTER JOIN traz muitos dados irrelevante
-
 - Para analisar vendas por produto, é melhor garantir todos os produtos e juntar (LEFT JOIN) os itens vendidos, para não perder produtos sem vendas.
-
 - não é necessário juntar venda para saber o total vendido por produto, pois itemVenda já tem essa associação. Reduz a complexidade da consulta e melhora performance.
-
 - Uso do COALESCE evita resultados confusos com NULL
 '''
-
 -- REESCRITA:
 select 
     p.idProduto, 
@@ -533,8 +547,8 @@ left join itemVenda iv
 group by p.idProduto, p.nome
 order by total_faturado desc;
 
------Funções--------
---procedure para aumentar ou diminuir o valor de todos os produtos de um artesão em um valor percentual--
+
+-- PROCEDURE: AUMENTAR OU DIMINUIR O VALOR DE TODOS OS PRODUTOS DE UM ARTESÃO EM UM VALOR PERCENTUAL
 create or replace procedure atualizar_valor(p_idArtesao int, p_percentual numeric)
 language plpgsql
 AS $$
@@ -542,20 +556,17 @@ BEGIN
 	update produto
 	set valorunitario = valorunitario * (1 + (p_percentual/100))
 	where idArtesao = p_idArtesao;
-
 	IF NOT FOUND THEN
         RAISE NOTICE 'Nenhum produto encontrado para o artesão com id %', p_idArtesao;
     END IF;
-
 EXCEPTION
     WHEN others THEN
         RAISE NOTICE 'Ocorreu um erro ao tentar atualizar os produtos do artesão %', p_idArtesao;
 END;
 $$;
-
 call atualizar_valor(1, 6); --teste
 ------------------------------------------------------------------------------------------------------------------
---função que retorna a media de pagamentos por tipo--
+-- FUNCTION: RETORNA A MEDIA DE TIPOS DE PAGAMENTO
 create or replace function media_pagamentos_por_tipo(p_tipoPagamento varchar(10))
 returns numeric as $$
 declare
@@ -578,9 +589,7 @@ select media_pagamentos_por_tipo('Boleto');
 
 --------------------------------------------------------------------
 
--- duas funcoes 
-
--- funcao 1: 
+-- FUNCTION 1: CALCULAR TOTAL DA VENDA 
 
 CREATE OR REPLACE FUNCTION calcular_total_venda(p_idVenda INT)
 returns DECIMAL(10,2) AS $$
@@ -600,7 +609,7 @@ $$ LANGUAGE plpgsql;
 
 SELECT calcular_total_venda(1) AS totalVenda; -- teste
 
--- funcao 2: 
+-- FUNCTION 2: QUANTIDADE DE UM PRODUTO AINDA DISPONIVEL
 
 CREATE OR REPLACE FUNCTION estoque_disponivel(p_idProduto INT)
 returns INT AS $$
@@ -626,6 +635,7 @@ $$ LANGUAGE plpgsql;
 
 
 SELECT estoque_disponivel(3) AS estoqueAtual; -- teste 
+
 
 -- triggers
 
@@ -695,7 +705,7 @@ NOTICE:  Estoque atualizado do produto 1: 7 unidades
 
 -- insert into itemVenda (quantidade, idVenda, idProduto) values (1, 1, 1)
 -------------------------------------------------------------------------------------------------
--- (3) TRIGGER: Atualizar o status do pedido apartir do status do pagamento---
+-- (3) TRIGGER: ATUALIZAR O STATUS DO PEDIDO APARTIR DO STATUS DO PAGAMENTO
 CREATE OR REPLACE FUNCTION atualizar_status_venda()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -733,9 +743,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
--- Criando o trigger
-
 CREATE TRIGGER trigger_atualiza_status_venda
 AFTER INSERT OR UPDATE ON pagamento
 FOR EACH ROW
@@ -745,7 +752,3 @@ EXECUTE FUNCTION atualizar_status_venda();
 UPDATE pagamento
 SET statusPagamento = 'Pago'
 WHERE idPagamento = 6;
-
-
-
-
